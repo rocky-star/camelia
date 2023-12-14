@@ -42,3 +42,20 @@ For managers, the first element should be @racket['man].
 For modules, use @racket['mod].
 The second element is a symbol representing the ID of the dependency.
 }
+
+@subsection{Querying}
+
+@deftogether[(
+  @defproc[(loaded-manager? [id Symbol]) Boolean]
+  @defproc[(loaded-module? [id Symbol]) Boolean]
+)]{
+These predicates check whether the specified manager or module has been loaded.
+Returns @racket[#t] if loaded, @racket[#f] otherwise.
+}
+
+@deftogether[(
+  @defproc[(get-loaded-managers) (Listof (Pairof Symbol Dep-Info))]
+  @defproc[(get-loaded-modules) (Listof (Pairof Symbol Dep-Info))]
+)]{
+Returns a list that contains all loaded managers or modules.
+}

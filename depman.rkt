@@ -52,3 +52,23 @@
     (when dep (raise-dep-not-loaded-error id dep)))
   (set! loaded-modules (cons (cons id info) loaded-modules)))
 (provide load-module)
+
+(: loaded-manager? (-> Symbol Boolean))
+(define (loaded-manager? id)
+  (loaded-dep? (cons 'man id)))
+(provide loaded-manager?)
+
+(: loaded-module? (-> Symbol Boolean))
+(define (loaded-module? id)
+  (loaded-dep? (cons 'mod id)))
+(provide loaded-module?)
+
+(: get-loaded-managers (-> (Listof (Pairof Symbol Dep-Info))))
+(define (get-loaded-managers)
+  loaded-managers)
+(provide get-loaded-managers)
+
+(: get-loaded-modules (-> (Listof (Pairof Symbol Dep-Info))))
+(define (get-loaded-modules)
+  loaded-modules)
+(provide get-loaded-modules)
