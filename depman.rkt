@@ -18,12 +18,8 @@
 
 (: loaded-dep? (-> Dep-Spec Boolean))
 (define (loaded-dep? dep)
-  (let loop ([loadeds (if (eq? (car dep) 'man) loaded-managers loaded-modules)])
-    (if (null? loadeds)
-        #f
-        (if (eq? (car (car loadeds)) (cdr dep))
-            #t
-            (loop (cdr loadeds))))))
+  (let ([loadeds (if (eq? (car dep) 'man) loaded-managers loaded-modules)])
+    (pair? (assoc (cdr dep) loadeds))))
 
 (: find-non-loaded-dep (-> (Listof Dep-Spec) (U Dep-Spec False)))
 (define (find-non-loaded-dep deps)
